@@ -20,6 +20,7 @@ module.exports = {
       /angular(\\|\/)core(\\|\/)esm5/,
       __dirname
     ),
+    // Create a vendor chunk.
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['main'],

@@ -21,10 +21,21 @@ module.exports = {
       /angular(\\|\/)core(\\|\/)esm5/,
       __dirname
     ),
+    // Create a vendor chunk.
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['main'],
       minChunks: (module) => module.resource && module.resource.startsWith(path.resolve(__dirname, 'node_modules'))
     }),
-  ]
+  ],
+  module: {
+    rules: [
+      { test: path.resolve(__dirname, 'node_modules/rxjs'), sideEffects: false },
+      { test: path.resolve(__dirname, 'node_modules/@angular/common'), sideEffects: false },
+      { test: path.resolve(__dirname, 'node_modules/@angular/compiler'), sideEffects: false },
+      { test: path.resolve(__dirname, 'node_modules/@angular/core'), sideEffects: false },
+      { test: path.resolve(__dirname, 'node_modules/@angular/platform-browser'), sideEffects: false },
+      { test: path.resolve(__dirname, 'node_modules/@angular/platform-browser-dynamic'), sideEffects: false },
+    ]
+  },
 };
